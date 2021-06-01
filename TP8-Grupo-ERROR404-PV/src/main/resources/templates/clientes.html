@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+		<title>Clientes</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+		<link rel="stylesheet" th:href="@{/css/atn.css}">
+        <link rel="shortcut icon" href="/image/infectado.png">
+	</head>
+	<body>
+	
+		<header th:replace="layout/header :: header"></header>
+	
+		<div class="container">
+						
+			<div > 
+				<h1 style="font-family: century gothic;">Lista de Clientes</h1>
+			</div>
+			
+			<div class="row">
+					<div class="col-sm-12 col-md-10"> 
+						<div class="scrollme">
+						<table class="table table-responsive table-hover" style="text-align: center; background-color: gray; color: white;">
+							<thead style="background-color: black;"> 
+								<tr id="miTablaEncabezado">
+									
+									
+									<th>Nro Doc</th>
+									
+									<th>Tip Doc</th>
+									
+									<th>N y Ap </th>
+									<th>E-mail</th>
+									<th>Password</th>
+									<th>Fecha Nac.</th>
+									<th>Edad</th>
+									<th>Telefono</th>
+									<th>F. Ult. compra</th>
+									<th>T. Ult. compra</th>
+									<th>T.F. de Nac.</th>
+									<th>T. prox. cumple</th>
+									
+									<th>ID Cuenta</th>
+									<th>Saldo</th>
+									<th>Fecha Creacion</th>
+									<th>Estado</th>
+									
+									
+									<th>Acciones </th>
+																	
+								</tr>
+							</thead>
+							<tbody>
+								<tr id="miTablaContenido" th:each = "cli:${cliente}">
+									
+									
+									
+									<td th:text="${cli.nroDocumento}"></td>
+									<td th:text="${cli.tipoDocumento}"></td>
+									
+									<td th:text="${cli.nombreApellido}"></td>
+									<td th:text="${cli.email}"></td>
+									<td th:text="${cli.password}"></td>
+									<td th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"> </td>
+									<td th:text="${cli.getEdad}"></td>
+									<td th:text="${cli.codigoAreaTelefono} + ' - ' + ${cli.nroTelefono}"> </td>
+									<td th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"> </td>
+									
+									<td th:text="${cli.calculoTiempoUltimaCompra}"></td>
+									<td th:text="${cli.calculoTiempoDesdeNacimiento} + ' dias'"></td>
+									<td th:text="${cli.calculoTiempoHastaCumple}"></td>		
+									
+									<td th:text="${cli.cuenta.id}"></td>
+									<td th:text="${cli.cuenta.saldo}"></td>
+									<td th:text="${#temporals.format(cli.cuenta.fechaCreacion,'dd/MM/yyyy')}"> </td>
+									<td th:text="${cli.cuenta.estado}"> </td>																
+									
+									
+									<td>
+										<a th:href="@{/cliente/editar/}+${cli.id}" class="btn btn-warning">Editar</a>
+										<a th:href="@{/cliente/eliminar/}+${cli.id}" class="btn btn-danger">Eliminar</a>
+									</td>
+									
+								</tr> 
+							</tbody>
+						
+						</table>
+						</div>
+					</div>
+			
+					<div class="col col-md-2">
+						<aside th:replace="layout/publicidad :: publicidad"></aside>
+					</div>
+				</div>
+			
+		</div><br>
+			
+		<footer th:replace="layout/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+	<body>
+		<header th:fragment="header">
+			<div class="jumbotron jumbotron-fluid"
+				style="background-color: rgb(45, 123, 210); text-align: center; 
+				background-image: url(/image/img-header.jpg); background-size: cover;"> 
+			  <div class="container">
+			    <h1 class="display-3 text-white" style="font-family: century gothic;">EMPRESA DE INFORMATICA</h1>
+			    <p class="lead text-white display-4">Sistema de gestión.</p>
+			    
+			     
+			   
+			   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
+				  <a class="navbar-brand" th:href="@{/home}">Inicio</a>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarNav">
+				    <ul class="navbar-nav" style="font-family: century gothic;">
+				      <li class="nav-item dropdown active">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Producto</a>
+					    <div class="dropdown-menu" style="font-family: century gothic;">
+					      <a class="dropdown-item" th:href="@{/producto/nuevo}">Nuevo Producto</a>
+					      <a class="dropdown-item" th:href="@{/producto/listado}">Lista Productos</a>
+					      <a class="dropdown-item" th:href="@{/producto/ultimo}">Ultimo Producto</a>
+					    </div>
+					  </li>
+					  
+					  <li class="nav-item dropdown active">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cliente</a>
+					    <div class="dropdown-menu" style="font-family: century gothic;">
+					      <a class="dropdown-item" th:href="@{/cliente/nuevo}">Nuevo Cliente</a>
+					      <a class="dropdown-item" th:href="@{/cliente/listado}">Lista Clientes</a>
+					    </div>
+					  </li>
+					  
+					  <li class="nav-item dropdown active">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compra</a>
+					    <div class="dropdown-menu" style="font-family: century gothic;" >
+					      <a class="dropdown-item" th:href="@{/compra/nuevo}">Nueva Compra</a>
+					      <a class="dropdown-item" th:href="@{/compra/listado}">Lista Compras</a>
+					    </div>
+					  </li>
+				      
+				   </ul>
+				  </div>
+				</nav> 
+			  </div>
+			</div>
+			
+		</header>
+	
+	</body>
+</html>

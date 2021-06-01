@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+		<title>Productos</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/atn.css}">
+		<link rel="shortcut icon" href="/image/infectado.png">
+	</head>
+	<body>
+		
+		<header th:replace="layout/header :: header"></header>
+		
+		<div class="container">
+			<div > 
+				<h1 style="font-family: century gothic;">Lista de Productos</h1>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12 col-md">
+					<table class="table table-hover" style="text-align: center; background-color: gray; color: white;">
+					<thead style="background-color: black;"> 
+						<tr>
+							<th>Código</th>
+							<th>Nombre</th>
+							<th>Precio</th>
+							<th>Marca</th>
+							<th>Stock</th>
+							
+							<!-- NUEVO TP7 -->
+							<th>Acciones </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each = "p:${producto}">
+							<td th:text="${p.codigo}"></td>
+							<td th:text="${p.nombre}"></td>
+							<td th:text="${p.precio}"></td>
+							<td th:text="${p.marca}"></td>
+							<td th:text="${p.stock}"></td>
+							<td>
+								<a th:href="@{/producto/editar/}+${p.codigo}" class="btn btn-warning">Editar</a>
+								<a th:href="@{/producto/eliminar/}+${p.codigo}" class="btn btn-danger">Eliminar</a>
+							</td>
+													
+						</tr> 
+					</tbody>
+				
+					</table>
+				</div>
+				<div class="col col-md-2">
+					<aside th:replace="layout/publicidad :: publicidad"></aside>
+				</div>
+	
+			
+			</div>
+		</div><br>
+		
+		<footer th:replace="layout/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+	</body>
+</html>

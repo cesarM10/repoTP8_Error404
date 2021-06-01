@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Ultimo producto</title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/atn.css}">
+	<link rel="shortcut icon" href="/image/infectado.png">
+</head>
+<body>
+	<header th:replace="layout/header :: header"></header>
+	
+	<div class="container">
+		<div class="row col-sm-12 col-md" >
+			<div class="col-sm-12 col-md-10" align= center style="border: solid; padding: 2rem;">
+				<div class="badge badge-primary text-wrap" style="width: auto; font-family: century gothic;">
+				<h1 >Ultimo producto agregado</h1>
+				</div>
+				<h3>Detalle del Producto</h3>
+				<p> Codigo: <spam th:text="${producto.codigo}"></spam> </p>
+				<p> Nombre: <spam th:text="${producto.nombre}"></spam> </p>
+				<p> Precio: $<spam th:text="${producto.precio}"></spam> </p>
+				<p> Marca: <spam th:text="${producto.marca}"></spam> </p>  
+				<p> Stock: <spam th:text="${producto.stock}"></spam> </p>
+			</div>
+			
+			<div class="col col-md-2">
+					<aside th:replace="layout/publicidad :: publicidad"></aside>
+			</div>
+		</div>	<br>
+	</div>		
+	<footer th:replace="layout/footer :: footer"></footer>
+	
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</body>
+</html>

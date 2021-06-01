@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Nueva Compra</title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/atn.css}">
+	<link rel="shortcut icon" href="/image/infectado.png">
+</head>
+	<body>
+		<header th:replace="layout/header :: header"></header>
+		
+		<div class="container">
+			<div class="row col-sm-12 col-md">
+				<div class="col-sm-12 col-md" style="border: solid;"> 
+					<h1 style="font-family: century gothic">Alta de una nueva compra</h1>
+					<form th:action="@{/compra/guardar}" th:object="${compra}" method="post" >
+						<!-- Ingreso ID 
+						<div class="form-group row">
+						    <label for="id" class="col-sm-2 col-form-label">ID compra</label>
+						    <div class="col-sm-10">
+						      <input type="number" class="form-control" id="id" th:field="*{id}" >
+						    </div>
+						</div>-->
+						
+						<input type="hidden" th:field="*{id}">
+						
+												
+						<!-- Ingreso Producto -->
+						<div class="form-group ">
+							<label for="producto" class="col-sm-2 col-form-label">Producto</label>
+						    <select id="producto" th:field="*{producto.codigo}">
+						      <option th:each = "p : ${productos}" selected
+						      th:value="${p.codigo}"
+						      th:text="${p.marca} + ' - ' + ${p.nombre} + ' - $' + ${p.precio}"
+						      th:selected="false"
+						      />
+						    </select>
+						</div>
+						<!-- Ingreso cantidad -->
+						<div class="form-group row">
+						    <label for="cantidad" class="col-sm-2 col-form-label">Cantidad</label>
+						    <div class="col-sm-10">
+						      <input type="number" class="form-control" id="cantidad" th:field="*{cantidad}" >
+						    </div>
+						</div>
+												
+						<!-- boton -->
+						<button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+					</form>
+				</div>			
+				
+				<div class="Col col-md-2" > 
+					<aside th:replace="layout/publicidad :: publicidad"></aside>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<footer th:replace="layout/footer :: footer" ></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+		
+	</body>
+</html>

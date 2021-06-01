@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+<title>Inicio</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/atn.css}">
+<link rel="shortcut icon" href="/image/infectado.png">
+</head>
+<body>
+	
+	<header th:replace="layout/header :: header"></header>
+	<div class="container">
+		<div class="col display-4" style="font-family: century gothic; font-size: 4;">Productos destacados
+		</div>
+		<div class="row" >
+			<div class="container row col-sm-12 col-md-10" align= center>
+				<div class="card" style="width: 16rem; margin: 1rem">
+				  <img src="/image/i9.png" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Microprocesador Core i9</h5>
+				    <p class="card-text">La familia de procesadores Intel® Core™ serie X es nuestro procesador de alta gama para equipos de escritorio más reciente y potente para el desempeño sorprendente de una PC para juegos y entusiastas.</p>
+				  </div>
+				</div>
+				
+				<div class="card" style="width: 16rem; margin: 1rem">
+				  <img src="/image/ryzen.png" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Microprocesador Ryzen Thread-ripper</h5>
+				   <p class="card-text">Haz realidad tu visión creativa con AMD Ryzen™ Threadripper™ de 3.ª generación, el procesador para computadoras de escritorio más potente del mundo1.</p>
+				  </div>
+				</div>
+				
+				<div class="card" style="width: 16rem; margin: 1rem">
+				  <img src="/image/f1-2021.png" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Juego PC - F1 2021</h5>
+				    <p class="card-text">• EL VIDEOJUEGO OFICIAL DE 2021 FORMULA ONE WORLD CHAMPIONSHIP™.Nuevas formas de jugar: modo carrera para dos jugadores e ""inicio de temporada real"".</p>
+				  </div>
+				</div>
+			</div>		
+		
+		
+			<div class="col col-md-2">
+				<aside th:replace="layout/publicidad :: publicidad"></aside>
+			</div>
+		</div>
+	</div>	
+	
+			
+	
+	<footer th:replace="layout/footer :: footer"></footer>
+	
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</body>
+</html>

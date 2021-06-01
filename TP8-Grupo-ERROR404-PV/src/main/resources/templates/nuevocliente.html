@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Registro Nuevo</title>
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+		<link rel="stylesheet" th:href="@{/css/atn.css}">
+		<link rel="shortcut icon" href="/image/infectado.png">
+	</head>
+	
+	<body>
+		<header th:replace="layout/header :: header"></header>
+			
+		
+		<div class="container">
+			<div class="row col-sm-12 col-md">
+		
+				<div class="col-sm12 col-md" style="border: solid;">
+					<h1 style="font-family: century gothic">Alta de un nuevo cliente</h1>
+				
+						<form th:action="@{/cliente/guardar}" method="post" th:object="${cliente}" >
+							
+							<input type="hidden" th:field="*{id}"> 
+							<input type="hidden" th:field="*{cuenta.id}">	
+							
+							<div class="form-group ">
+							<label for="tipoDocumento">Tipo de Documento</label>
+						    <select class="form-control" id="tipoDocumento" th:field="*{tipoDocumento}">
+						      <option value="" selected>Seleccione </option>
+						      <option value="DNI">DNI</option>
+						      <option value="Pasaporte">Pasaporte</option>
+						    </select>
+							</div>						
+							
+							<div class="form-group row">
+							    <label for="nroDocumento" class="col-sm-2 col-form-label">Numero de Documento</label>
+							    <div class="col-sm-10">
+							      <input type="number" class="form-control" id="nroDocumento" th:field="*{nroDocumento}" >
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="nombreApellido" class="col-sm-2 col-form-label">Nombre y Apellido</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="nombreApellido" th:field="*{nombreApellido}" placeholder="Ingrese nombre y apellido...">
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+							    <div class="col-sm-10">
+							      <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Ingrese email...">
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="password" class="col-sm-2 col-form-label">Password</label>
+							    <div class="col-sm-10">
+							      <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Ingrese password...">
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="fechaNacimiento" class="col-sm-2 col-form-label">Fecha Nacimiento</label>
+							    <div class="col-sm-10">
+							      <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}">
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="codigoAreaTelefono" class="col-sm-2 col-form-label">Codigo de Area</label>
+							    <div class="col-sm">
+							      <input type="number" class="form-control" id="codigoAreaTelefono" th:field="*{codigoAreaTelefono}">
+							    </div>
+							    <label for="nroTelefono" class="col-sm-2 col-form-label">Telefono</label>
+							    <div class="col-sm">
+							      <input type="number" class="form-control" id="nroTelefono" th:field="*{nroTelefono}">
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+							    <label for="fechaUltimaCompra" class="col-sm-2 col-form-label">Fecha ultima compra</label>
+							    <div class="col-sm-10">
+							      <input type="date" class="form-control" id="fechaUltimaCompra" th:field="*{fechaUltimaCompra}">
+							    </div>
+							</div>
+							
+							<!-- Nuevo TP7 -->
+							<div class="form-group row">
+							    <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
+							    <div class="col-sm-10">
+							      <input type="number" class="form-control" id="saldo" th:field="*{cuenta.saldo}" step="0.01" >
+							    </div>
+							</div>	
+							
+							<div class="form-group row">
+							    <label for="fechaCreacion" class="col-sm-2 col-form-label">Fecha de Creacion</label>
+							    <div class="col-sm-10">
+							      <input type="date" class="form-control" id="fechaCreacion" th:field="*{cuenta.fechaCreacion}">
+							    </div>
+							</div>
+							
+							<div class="form-group ">
+							<label for="estado">Estado de cuenta</label>
+						    <select class="form-control" id="estado" th:field="*{cuenta.estado}">
+						      <option value="" selected>Seleccione </option>
+						      <option value="Activo">Activa</option>
+						      <option value="Inactivo">Inactiva</option>
+						    </select>
+							</div>
+							
+																
+							<button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+						
+						</form>
+				</div>
+					
+				<div class="Col col-md-2">
+					<aside th:replace="layout/publicidad :: publicidad"></aside>
+				</div>
+			</div>	
+		</div><br>
+		<footer th:replace="layout/footer :: footer"></footer>
+	
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+	</body>
+</html>
