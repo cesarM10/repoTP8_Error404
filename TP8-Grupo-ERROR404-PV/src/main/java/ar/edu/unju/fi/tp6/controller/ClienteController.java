@@ -2,12 +2,15 @@ package ar.edu.unju.fi.tp6.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,13 +38,25 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/cliente/guardar")
-	public ModelAndView agregarClientePage(@ModelAttribute("cliente")Cliente cliente) {
-		ModelAndView model = new ModelAndView("clientes");
+	public ModelAndView agregarClientePage(@Valid @ModelAttribute("cliente")Cliente cliente, BindingResult resultadoValidacion) {
+		/*ModelAndView model = new ModelAndView("clientes");
 		
 		clienteService.agregarCliente(cliente);
 		
 		model.addObject("cliente", clienteService.obtenerClientes());
-		return model;
+		return model;*/
+		//ModelAndView model = new ModelAndView("clientes");
+				ModelAndView model2;
+				if(resultadoValidacion.hasErrors()) {//con errores
+					model2 = new ModelAndView("nuevocliente");
+					model2.addObject("cliente", clienteService.getCliente());
+					return model2;
+			}else {//sin errores
+				ModelAndView model  = new ModelAndView("clientes");
+				clienteService.agregarCliente(cliente);	
+				model.addObject("cliente", clienteService.obtenerClientes());
+				return model;
+			}
 	}
 	
 	@GetMapping("/cliente/listado")
