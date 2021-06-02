@@ -13,6 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,31 +28,56 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "clientes")
 public class Cliente {
+	//@Size(min=15000000, max=43999999)
+	@NotNull(message="debe seleccionar el  tipo de documento")
 	@Column(name = "cli_tipoDocumento")
 	private String tipoDocumento;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cli_id")
 	private Long id;
+	
+	@Min(value=27000000,message="debe ser mayor a 27000000")
+	@NotNull(message="no debe estar en blanco")
 	@Column(name = "cli_nroDocumento")
 	private Long nroDocumento;
+	
+	@NotEmpty(message="el nombre del cliente no debe estar vacio")
 	@Column(name = "cli_nombreApellido")
 	private String nombreApellido;
+	
+	@NotBlank(message="el email no debe estar en blanco")
 	@Column(name = "cli_email")
 	private String email;
+	
+	@NotBlank(message="no debe tener espacios en blanco")
+	@NotEmpty(message="el password no debe estar vacio")
 	@Column(name = "cli_password")
 	private String password;
+	
+	@NotNull(message="la fecha debe ser ingresada")
 	@Column(name = "cli_fechaNacimiento")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
+	
+	//@Size(min=100, max=999,message="no comple con el rango")
+	@Min(value=100, message="el codigo debe ser mayo a 100")
+	@NotNull(message="la fecha debe ser ingresada")
 	@Column(name = "cli_codigoAreaTelefono")
 	private int codigoAreaTelefono;
+	
+	//@Size(min=4000000, max=999999,message="no comple con el rango")
+	@NotNull(message="el numero no debe estar en blanco")	
 	@Column(name = "cli_nroTelefono")
 	private int nroTelefono;
+	
+	@NotNull(message="la fecha debe ser ingresada")
 	@Column(name = "cli_fechaUltimaCompra")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaUltimaCompra;
 	
+	@Valid
 	@Autowired
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cta_id", nullable = false)
