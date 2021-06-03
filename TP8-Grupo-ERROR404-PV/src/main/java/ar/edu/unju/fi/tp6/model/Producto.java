@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -26,20 +27,22 @@ public class Producto {
 	@Column(name = "pro_codigo")
 	private Long codigo;
 	
-	@NotEmpty(message="el nombre del producto no debe estar vacio")
-	@Size(min = 3, message = "El nombre no debe ser vacío, como mínimo debe tener 3 caracteres")
+	@NotEmpty(message = "El campo no debe estar vacio.")
+	@Size(min = 3, max = 150,  message = "El campo nombre debe tener como minimo 3 caracteres.")
 	@Column(name = "pro_nombre")
 	private String nombre;
 	
-	@Min(value=1000, message="el precio debe superar los 1000")
+	@Min(value = 1, message = "El valor no debe ser negativo.")
+	@Max(value = 100000, message = "El valor no debe ser mayor a 100000.")
 	@Column(name = "pro_precio")
 	private double precio;
 
-	@NotEmpty(message="la marca del producto no debe estar vacio")
+	@NotEmpty(message = "El campo no debe estar vacio.")
+	@Size(min = 1, max = 150,  message = "El campo marca debe tener como minimo 1 caracter.")
 	@Column(name = "pro_marca")
 	private String marca;
 	
-	@Min(value=5, message="el stok del producto debe ser mayo a 5")
+	@Min(value = 1, message = "El valor no puede ser cero o negativo.")
 	@Column(name = "pro_stock")
 	private int stock;
 	
