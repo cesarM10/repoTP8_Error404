@@ -1,6 +1,6 @@
 package ar.edu.unju.fi.tp6.model;
 
-import java.text.DecimalFormat;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +26,7 @@ public class Compra {
 	@Column(name = "com_id")
 	private Long id ;
 	
-	//@OneToMany(mappedBy = "compra")
-	//private List<Producto> productos = new ArrayList<Producto>();
+
 	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -113,14 +112,7 @@ public class Compra {
 	}
 
 
-	/*public List<Producto> getProductos() {
-		return productos;
-	}
 
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}*/
 
 
 	@Override
@@ -130,13 +122,6 @@ public class Compra {
 	}
 
 
-	
 
-	
-	
-	
- 
- 
-	
 
 }
