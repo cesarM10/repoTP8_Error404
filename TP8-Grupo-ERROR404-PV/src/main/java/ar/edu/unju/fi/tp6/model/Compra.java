@@ -26,7 +26,9 @@ public class Compra {
 	@Column(name = "com_id")
 	private Long id ;
 	
-
+	//@OneToMany(mappedBy = "compra")
+	//private List<Producto> productos = new ArrayList<Producto>();
+	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pro_codigo", nullable = false)
@@ -36,7 +38,10 @@ public class Compra {
 	@Column(name = "com_cantidad", nullable =  false)
 	private int cantidad ;
 
-
+	//No se consideró la validacion ya que el calculo del total se realiza luego de guardar la compra.
+	@Column(name = "com_total", nullable = false)
+	private double total;
+	
 	
 	public Compra() {
 		// TODO Auto-generated constructor stub
@@ -101,17 +106,37 @@ public class Compra {
 		return total;
 	}
 
+	
 
+	public void setTotal() {
+		this.total =cantidad * this.producto.getPrecio();
+	}
+
+
+	/*public List<Producto> getProductos() {
+		return productos;
+	}
+
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}*/
 
 
 	@Override
 	public String toString() {
-
+		return "Compra [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad
+				+ ", total=" + total + "]";
 	}
 
-	
+
 	
 
-
+	
+	
+	
+ 
+ 
+	
 
 }
