@@ -31,19 +31,23 @@ public class ProductoController {
 	
 	@PostMapping("/producto/guardar")
 	public ModelAndView agregarProductoPage(@Valid @ModelAttribute("producto")Producto producto, BindingResult resultadoValidacion) {
-		//ModelAndView model = new ModelAndView("productos");
-		
 		ModelAndView model;
-		if(resultadoValidacion.hasErrors()) {//tiene errores	
-			  model = new ModelAndView("nuevoproducto");
-			  model.addObject("producto", productoService.getProducto());
-			  return model;
-		}else {//no hay errrores
-			ModelAndView modelView = new ModelAndView("productos");
+		
+		if(resultadoValidacion.hasErrors()) {
+			model = new ModelAndView("nuevoproducto");
+			
+			return model;
+		}else {
+			model = new ModelAndView("productos");
+			
 			productoService.agregarProducto(producto);
-			modelView.addObject("producto", productoService.obtenerProductos());
-			return modelView;
+			
+			model.addObject("producto", productoService.obtenerProductos());
+			
+			return model;
 		}
+		
+		
 	}
 	
 	@GetMapping("/producto/ultimo")
@@ -81,7 +85,5 @@ public class ProductoController {
 		
 		return model;
 	}
-	
-	
-	
+	 
 }
