@@ -38,6 +38,8 @@
 						      th:selected="false"
 						      />
 						    </select>
+						   
+						    
 						</div>
 						<!-- Ingreso cantidad -->
 						<div class="form-group row">
@@ -45,6 +47,9 @@
 						    <div class="col-sm-10">
 						      <input type="number" class="form-control" id="cantidad" th:field="*{cantidad}" >
 						    </div>
+						    
+						    <div class = "form-text text-danger col-sm-10 offset-2" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+						    
 						</div>
 												
 						<!-- boton -->
