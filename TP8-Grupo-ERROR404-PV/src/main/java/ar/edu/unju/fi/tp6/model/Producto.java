@@ -121,8 +121,5 @@ public class Producto {
 				+ ", stock=" + stock + ", compra=" + compra + "]";
 	}
 
-	
-	
-	
-	
+ 
 }
