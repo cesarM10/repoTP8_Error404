@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,17 +26,17 @@ public class Compra {
 	@Column(name = "com_id")
 	private Long id ;
 	
+
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pro_codigo", nullable = false)
 	private Producto producto ;
 	
+	@Min(value = 1, message = "El valor no puede ser cero o negativo.")
 	@Column(name = "com_cantidad", nullable =  false)
 	private int cantidad ;
 
-	//No se considera la validacion ya que el calculo del total se realiza luego de guardar la compra.
-	@Column(name = "com_total", nullable = false)
-	private double total;
+
 	
 	public Compra() {
 		// TODO Auto-generated constructor stub
@@ -54,6 +55,7 @@ public class Compra {
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.total = total;
+
 	}
 	
 	/**
@@ -99,29 +101,17 @@ public class Compra {
 		return total;
 	}
 
-	public void setTotal() {
-		String totalString = "";
-		DecimalFormat df = new DecimalFormat("#.##");
-		
-		totalString = df.format(this.cantidad * this.producto.getPrecio());
-		this.total = Double.parseDouble(totalString);
-	}
+
 
 
 	@Override
 	public String toString() {
-		return "Compra [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", total=" + total + "]";
+
 	}
 
 	
 	
 
 
-	
-	
-	
- 
- 
-	
 
 }
