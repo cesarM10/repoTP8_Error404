@@ -2,12 +2,15 @@ package ar.edu.unju.fi.tp6.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,13 +38,19 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/cliente/guardar")
-	public ModelAndView agregarClientePage(@ModelAttribute("cliente")Cliente cliente) {
-		ModelAndView model = new ModelAndView("clientes");
-		
-		clienteService.agregarCliente(cliente);
-		
-		model.addObject("cliente", clienteService.obtenerClientes());
-		return model;
+	public ModelAndView agregarClientePage(@Valid @ModelAttribute("cliente")Cliente cliente, BindingResult resultadoValidacion) {
+		ModelAndView model;
+		if(resultadoValidacion.hasErrors()) { //encontró errores.
+			model = new ModelAndView("nuevocliente");
+			return model;
+		}else { //no encontró errores.
+			model = new ModelAndView("clientes");
+			
+			clienteService.agregarCliente(cliente);
+			
+			model.addObject("cliente", clienteService.obtenerClientes());
+			return model;
+		}
 	}
 	
 	@GetMapping("/cliente/listado")
@@ -54,7 +63,6 @@ public class ClienteController {
 		return model;
 	}
 	
-	//NUEVO TP7
 	@GetMapping("/cliente/editar/{id}")
 	public ModelAndView getClienteEditPage(@PathVariable(value = "id")Long id) {
 		LOGGER.info("METODO - - EDITAR CLIENTE");

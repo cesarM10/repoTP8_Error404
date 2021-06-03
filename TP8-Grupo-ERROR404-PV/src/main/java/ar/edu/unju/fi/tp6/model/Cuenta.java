@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -22,12 +26,18 @@ public class Cuenta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cta_id")
 	private Long id; 
+	
+	@Min(value = 1, message = "El valor no debe ser negativo.")
+	@Max(value = 100000, message = "El valor no debe ser mayor a 100000.")
 	@Column(name = "cta_saldo")
 	private double saldo;
 	
+	@NotNull(message = "El campo Fecha Creacion no debe ser nulo.")
 	@Column(name = "cta_fechaCreacion")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaCreacion;// (LocalDate) Se ingresa en el formulario
+	
+	@NotEmpty(message="Seleccione una opcion.")
 	@Column(name = "cta_estado")
 	private String estado;//(String) -> ACTIVA, INACTIVA
 	

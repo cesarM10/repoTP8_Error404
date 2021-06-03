@@ -13,6 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,31 +30,52 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "clientes")
 public class Cliente {
+	@NotEmpty(message="Seleccione una opcion.")
 	@Column(name = "cli_tipoDocumento")
 	private String tipoDocumento;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cli_id")
 	private Long id;
+	
+	@Min(value = 1, message = "El valor no puede ser negativo.")
 	@Column(name = "cli_nroDocumento")
 	private Long nroDocumento;
+	
+	@NotEmpty(message = "El campo no debe estar vacio.")
+	@Size(min = 3, max = 150,  message = "El campo Nombre y Apellido debe tener como minimo 3 caracteres.")
 	@Column(name = "cli_nombreApellido")
 	private String nombreApellido;
+	
+	@Email(message = "Ingrese un formato de email valido.")
 	@Column(name = "cli_email")
 	private String email;
+	
+	@Size(min = 8, message = "El campo password debe tener como minimo 8 caracteres.")
+	@NotBlank(message = "El campo contraseña no puede ser vacio.")
 	@Column(name = "cli_password")
 	private String password;
+	
+	@NotNull(message = "El campo Fecha de nacimiento no debe ser nulo.")
 	@Column(name = "cli_fechaNacimiento")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
+	
+	@Min(value = 1, message = "El campo no debe ser negativo")
 	@Column(name = "cli_codigoAreaTelefono")
 	private int codigoAreaTelefono;
+	
+	@Min(value = 1, message = "El campo no debe ser negativo")
 	@Column(name = "cli_nroTelefono")
 	private int nroTelefono;
+	
+	@NotNull(message = "El campo Fecha Ultima Compra no debe ser nulo.")
 	@Column(name = "cli_fechaUltimaCompra")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaUltimaCompra;
 	
+	@Valid
 	@Autowired
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cta_id", nullable = false)
