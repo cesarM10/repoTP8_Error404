@@ -39,24 +39,18 @@ public class ClienteController {
 	
 	@PostMapping("/cliente/guardar")
 	public ModelAndView agregarClientePage(@Valid @ModelAttribute("cliente")Cliente cliente, BindingResult resultadoValidacion) {
-		/*ModelAndView model = new ModelAndView("clientes");
-		
-		clienteService.agregarCliente(cliente);
-		
-		model.addObject("cliente", clienteService.obtenerClientes());
-		return model;*/
-		//ModelAndView model = new ModelAndView("clientes");
-				ModelAndView model2;
-				if(resultadoValidacion.hasErrors()) {//con errores
-					model2 = new ModelAndView("nuevocliente");
-					model2.addObject("cliente", clienteService.getCliente());
-					return model2;
-			}else {//sin errores
-				ModelAndView model  = new ModelAndView("clientes");
-				clienteService.agregarCliente(cliente);	
-				model.addObject("cliente", clienteService.obtenerClientes());
-				return model;
-			}
+		ModelAndView model;
+		if(resultadoValidacion.hasErrors()) { //encontró errores.
+			model = new ModelAndView("nuevocliente");
+			return model;
+		}else { //no encontró errores.
+			model = new ModelAndView("clientes");
+			
+			clienteService.agregarCliente(cliente);
+			
+			model.addObject("cliente", clienteService.obtenerClientes());
+			return model;
+		}
 	}
 	
 	@GetMapping("/cliente/listado")
@@ -69,7 +63,6 @@ public class ClienteController {
 		return model;
 	}
 	
-	//NUEVO TP7
 	@GetMapping("/cliente/editar/{id}")
 	public ModelAndView getClienteEditPage(@PathVariable(value = "id")Long id) {
 		LOGGER.info("METODO - - EDITAR CLIENTE");
