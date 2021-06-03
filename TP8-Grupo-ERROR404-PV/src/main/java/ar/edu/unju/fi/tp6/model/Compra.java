@@ -1,8 +1,6 @@
 package ar.edu.unju.fi.tp6.model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +25,6 @@ public class Compra {
 	@Column(name = "com_id")
 	private Long id ;
 	
-	@OneToMany(mappedBy = "compra")
-	private List<Producto> productos = new ArrayList<Producto>();
-	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pro_codigo", nullable = false)
@@ -39,7 +33,9 @@ public class Compra {
 	@Column(name = "com_cantidad", nullable =  false)
 	private int cantidad ;
 
-	
+	//No se considera la validacion ya que el calculo del total se realiza luego de guardar la compra.
+	@Column(name = "com_total", nullable = false)
+	private double total;
 	
 	public Compra() {
 		// TODO Auto-generated constructor stub
@@ -52,12 +48,12 @@ public class Compra {
 	 * @param cantidad
 	 * @param total
 	 */
-	public Compra(Long id, Producto producto, int cantidad) {
+	public Compra(Long id, Producto producto, int cantidad, double total) {
 		super();
 		this.id = id;
 		this.producto = producto;
 		this.cantidad = cantidad;
-
+		this.total = total;
 	}
 	
 	/**
@@ -99,32 +95,26 @@ public class Compra {
 	/**
 	 * @return the total
 	 */
-	public String getTotal(double precio) {
-		String total = "";
-
-		DecimalFormat df = new DecimalFormat("#.##");
-		
-		total =df.format(this.cantidad * precio);
-		
+	public double getTotal() {
 		return total;
 	}
 
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setTotal() {
+		String totalString = "";
+		DecimalFormat df = new DecimalFormat("#.##");
+		
+		totalString = df.format(this.cantidad * this.producto.getPrecio());
+		this.total = Double.parseDouble(totalString);
 	}
 
 
 	@Override
 	public String toString() {
-		return "Compra [id=" + id + ", productos=" + productos + ", producto=" + producto + ", cantidad=" + cantidad
-				+ "]";
+		return "Compra [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", total=" + total + "]";
 	}
+
+	
+	
 
 
 	

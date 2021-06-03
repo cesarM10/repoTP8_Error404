@@ -25,7 +25,7 @@ public class CompraServiceImp implements ICompraService{
 	@Override
 	public void generarTablaCompra() {
 		compraList = TablaCompra.listaCompras;
-		compraList.add(new Compra(1L, new Producto(1L,"Procesador Core i9",298999.99,"INTEL",100),1));
+		compraList.add(new Compra(1L, new Producto(1L,"Procesador Core i9",298999.99,"INTEL",100),1,298999.99));
 		LOGGER.info("METHOD: generarTablaCompra - creo primera compra por defecto" + compraList.get(compraList.size()-1));
 
 	}
@@ -59,6 +59,12 @@ public class CompraServiceImp implements ICompraService{
 	public void eliminarCompra(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Compra> buscarCompras(String nombre, double total) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
